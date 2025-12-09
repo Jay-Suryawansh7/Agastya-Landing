@@ -1,0 +1,23 @@
+// Prisma schema file for Agastya Waitlist
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Waitlist {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  organization String?
+  role         String?
+  usageReason  String?  @map("usage_reason")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("waitlist")
+}
